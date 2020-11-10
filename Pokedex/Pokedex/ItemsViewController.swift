@@ -9,12 +9,14 @@ import UIKit
 
 class Item: NSObject {
     var name: String
+    var type: String
     var valueInDollars: Int
     var serialNumber: String?
     let dateCreated: Date
     
-    init(name: String, serialNumber: String?, valueInDollars: Int) {
+    init(name: String, type: String, serialNumber: String?, valueInDollars: Int) {
         self.name = name
+        self.type = type
         self.valueInDollars = valueInDollars
         self.serialNumber = serialNumber
         self.dateCreated = Date()
@@ -23,22 +25,21 @@ class Item: NSObject {
     
     convenience init(random: Bool = false) {
         if random {
-            let adjectives = ["Fluffy", "Rusty", "Shiny"]
-            let nouns = ["Bear", "Spork", "Mac"]
+            let names = ["Jigglypuff", "Caterpie", "Crobat", "Oddish", "Mudkip", "Espeon"]
+            let types = ["Normal", "Fire", "Water", "Grass", "Flying", "Fighting", "Poison", "Electric", "Ground", "Rock", "Psychic", "Ice", "Bug", "Ghost", "Steel", "Dragon", "Dark", "Fairy"]
             
-            var idx = arc4random_uniform(UInt32(adjectives.count))
-            let randomAdjective = adjectives[Int(idx)]
+            var idx = arc4random_uniform(UInt32(names.count))
+            let randomName = names[Int(idx)]
             
-            idx = arc4random_uniform(UInt32(nouns.count))
-            let randomNoun = nouns[Int(idx)]
+            idx = arc4random_uniform(UInt32(types.count))
+            let randomType = types[Int(idx)]
             
-            let randomName = "\(randomAdjective) \(randomNoun)"
             let randomValue = Int(arc4random_uniform(100))
     
             let randomSerialNumber = UUID().uuidString.components(separatedBy: "-").first!
-            self.init(name: randomName, serialNumber: randomSerialNumber, valueInDollars: randomValue)
+            self.init(name: randomName, type: randomType, serialNumber: randomSerialNumber, valueInDollars: randomValue)
         } else {
-            self.init(name: "", serialNumber: nil, valueInDollars: 0) }
+            self.init(name: "", type: "", serialNumber: nil, valueInDollars: 0) }
         }
 
 }
@@ -106,7 +107,7 @@ class ItemsViewController: UITableViewController {
         // will appear in on the tableview
         let item = itemStore.allItems[indexPath.row]
         cell.textLabel?.text = item.name
-        cell.detailTextLabel?.text = "$\(item.valueInDollars)"
+        cell.detailTextLabel?.text = item.type
         return cell
         
     }
