@@ -117,12 +117,33 @@ class ItemsViewController: UITableViewController {
         
         // If the table view is asking to commit a delete command...
         if editingStyle == .delete {
-            let item = itemStore.allItems[indexPath.row] // Remove the item from the store
-            itemStore.removeItem(item)
-            // Also remove that row from the table view with an animation
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+            let item = itemStore.allItems[indexPath.row]
+            
+            //Ask the user to confirm or cancel the deletion of an item.
+            let title = "Delete \(item.name)?"
+            let message = "Are you sure you want to delete this item?"
+            //Makes message
+            let ac = UIAlertController(title: title, message: message,
+            preferredStyle: .actionSheet)
+            
+            //Actions that the user can choose from
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            ac.addAction(cancelAction)
+            
+            let deleteAction = UIAlertAction(title: "Delete", style: .destructive,
+                                             handler: { (action) -> Void in
+                // Remove the item from the store
+                self.itemStore.removeItem(item)
+                // Also remove that row from the table view with an animation
+                self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            })
+            ac.addAction(deleteAction)
+            
+            // Present the alert controller
+            present(ac, animated: true, completion: nil)
         }
     }
+        
     
     //In order to move rows
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath,
@@ -130,7 +151,7 @@ class ItemsViewController: UITableViewController {
         // Update the model
         itemStore.moveItem(from: sourceIndexPath.row, to: destinationIndexPath.row)
     }
-    
+
 }
 
 
