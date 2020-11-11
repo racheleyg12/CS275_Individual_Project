@@ -112,6 +112,25 @@ class ItemsViewController: UITableViewController {
         
     }
     
+    //In order to delete rows
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        // If the table view is asking to commit a delete command...
+        if editingStyle == .delete {
+            let item = itemStore.allItems[indexPath.row] // Remove the item from the store
+            itemStore.removeItem(item)
+            // Also remove that row from the table view with an animation
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
+    
+    //In order to move rows
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath,
+                            to destinationIndexPath: IndexPath) {
+        // Update the model
+        itemStore.moveItem(from: sourceIndexPath.row, to: destinationIndexPath.row)
+    }
+    
 }
 
 
