@@ -27,17 +27,6 @@ class ItemStore {
         allItems.insert(movedItem, at: toIndex)
     }
     
-    func filterItemsBy(_ price: Int = 50) -> [[Item]] {
-        var filteredItems = [[Item](), [Item]()]
-        for item in allItems {
-            if item.valueInDollars > price {
-                filteredItems[0].append(item)
-            } else {
-                filteredItems[1].append(item)
-            }
-        }
-        return filteredItems
-    }
     
     @discardableResult func createItem() -> Item {
         let newItem = Item(random: true)

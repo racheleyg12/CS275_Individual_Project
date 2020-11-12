@@ -10,16 +10,12 @@ import UIKit
 class Item: NSObject {
     var name: String
     var type: String
-    var valueInDollars: Int
-    var serialNumber: String?
-    let dateCreated: Date
+    var number: Int
     
-    init(name: String, type: String, serialNumber: String?, valueInDollars: Int) {
+    init(name: String, type: String, number:Int) {
         self.name = name
         self.type = type
-        self.valueInDollars = valueInDollars
-        self.serialNumber = serialNumber
-        self.dateCreated = Date()
+        self.number = number
         super.init()
     }
     
@@ -36,10 +32,10 @@ class Item: NSObject {
             
             let randomValue = Int(arc4random_uniform(100))
     
-            let randomSerialNumber = UUID().uuidString.components(separatedBy: "-").first!
-            self.init(name: randomName, type: randomType, serialNumber: randomSerialNumber, valueInDollars: randomValue)
+            
+            self.init(name: randomName, type: randomType, number: randomValue)
         } else {
-            self.init(name: "", type: "", serialNumber: nil, valueInDollars: 0) }
+            self.init(name: "", type: "", number: 0) }
         }
 
 }
@@ -59,6 +55,7 @@ class ItemsViewController: UITableViewController {
             tableView.insertRows(at: [indexPath], with: .automatic) }
     
     }
+    
     @IBAction func toggleEditingMode(_ sender: UIButton) {
         // If you are currently in editing mode...
         if isEditing {
@@ -92,22 +89,47 @@ class ItemsViewController: UITableViewController {
         
     }
     
+    //Reusing Cells
     //Specifying a Row for the UITableView aka UITableViewCell
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // Create an instance of UITableViewCell, with default appearance
-        //let cell = UITableViewCell(style: .value1, reuseIdentifier: "UITableViewCell")
-        
-        // get a new or recycled cell
         // Get a new or recycled cell
-        let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
-        //let cell = tableView.dequeueReusableCell(withIdentifer: "UITableViewCell", for: indexPath)
+        let item = itemStore.allItems[indexPath.row]
+        //Use PokemonCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PokemonCell",
+        for: indexPath) as! PokemonCell
         
         // Set the text on the cell with the description of the item
         // that is at the nth index of items, where n = row this cell
-        // will appear in on the tableview
-        let item = itemStore.allItems[indexPath.row]
-        cell.textLabel?.text = item.name
-        cell.detailTextLabel?.text = item.type
+        // What will appear in on the tableview
+        cell.nameLabel?.text = item.name
+        cell.numberLabel?.text = "\(item.number)"
+        cell.typeLabel?.text = item.type
+        
+        //Color of the Type
+        switch item.type {
+        case "Grass":
+            cell.typeLabel?.textColor = UIColor.green
+        case "Water":
+            cell.typeLabel?.textColor = UIColor.blue
+        case "Fire":
+            cell.typeLabel?.textColor = UIColor.red
+        case "Normal":
+            cell.typeLabel?.textColor = UIColor.gray
+        case "Poison":
+            cell.typeLabel?.textColor = UIColor.purple
+        case "Rock":
+            cell.typeLabel?.textColor = UIColor.brown
+        case "Electric":
+            //Visible Yellow
+             cell.typeLabel?.textColor = UIColor.init(red: 1.0, green: 0.9, blue: 0.0, alpha: 1.0)
+
+        default:
+            cell.typeLabel?.textColor = UIColor.black
+        }
+       
+        //cell.typeLabel?.textColor = UIColor.init(named: "yellow")
+        
+        //
         return cell
         
     }
@@ -151,8 +173,15 @@ class ItemsViewController: UITableViewController {
         // Update the model
         itemStore.moveItem(from: sourceIndexPath.row, to: destinationIndexPath.row)
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 65
+    }
 
 }
+
 
 
 //override func viewDidLoad() {

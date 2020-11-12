@@ -44,29 +44,50 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UITableViewCell" textLabel="osC-0Q-ECH" detailTextLabel="g0b-53-MoW" style="IBUITableViewCellStyleValue1" id="75l-8m-gvB">
-                                <rect key="frame" x="0.0" y="88" width="414" height="43.666667938232422"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PokemonCell" rowHeight="65" id="75l-8m-gvB" customClass="PokemonCell" customModule="Pokedex" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="88" width="414" height="65"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="75l-8m-gvB" id="ZLR-5b-BpK">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="65"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="osC-0Q-ECH">
-                                            <rect key="frame" x="20.000000000000004" y="11.999999999999998" width="33.333333333333336" height="20.333333333333332"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uLM-BG-d5J">
+                                            <rect key="frame" x="20" y="9.9999999999999982" width="54" height="25.333333333333329"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="g0b-53-MoW">
-                                            <rect key="frame" x="350" y="11.999999999999998" width="44" height="20.333333333333332"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nxv-uY-BJf">
+                                            <rect key="frame" x="357.33333333333331" y="22.666666666666664" width="39.666666666666686" height="19.666666666666664"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PSE-d7-aQz">
+                                            <rect key="frame" x="20.000000000000004" y="37" width="55.333333333333343" height="18"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="PSE-d7-aQz" secondAttribute="bottom" constant="10" id="2BM-hw-BAb"/>
+                                        <constraint firstItem="Nxv-uY-BJf" firstAttribute="top" secondItem="ZLR-5b-BpK" secondAttribute="top" constant="22.670000000000002" id="2fW-v7-Zir"/>
+                                        <constraint firstItem="PSE-d7-aQz" firstAttribute="leading" secondItem="ZLR-5b-BpK" secondAttribute="leading" constant="20" id="6Ms-ha-Hue"/>
+                                        <constraint firstItem="uLM-BG-d5J" firstAttribute="top" secondItem="ZLR-5b-BpK" secondAttribute="top" constant="10" id="Nj5-fQ-dbV"/>
+                                        <constraint firstItem="uLM-BG-d5J" firstAttribute="leading" secondItem="ZLR-5b-BpK" secondAttribute="leading" constant="20" id="j5t-1K-nb7"/>
+                                        <constraint firstAttribute="trailing" secondItem="Nxv-uY-BJf" secondAttribute="trailing" constant="17" id="jNb-BF-0Km"/>
+                                        <constraint firstAttribute="bottom" secondItem="Nxv-uY-BJf" secondAttribute="bottom" constant="20.670000000000002" id="z9l-qj-FUe"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <constraints>
+                                    <constraint firstItem="Nxv-uY-BJf" firstAttribute="centerY" secondItem="75l-8m-gvB" secondAttribute="centerY" id="MEO-Wa-6kR"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="nameLabel" destination="uLM-BG-d5J" id="3lT-js-IaL"/>
+                                    <outlet property="numberLabel" destination="PSE-d7-aQz" id="wjR-fM-IjO"/>
+                                    <outlet property="typeLabel" destination="Nxv-uY-BJf" id="5mp-ym-Mr4"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
