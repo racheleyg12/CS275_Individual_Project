@@ -6,7 +6,7 @@
 //  Copyright © 2020 Rachel Goldman. All rights reserved.
 //
 import UIKit
-class DetailViewController: UIViewController {
+class DetailViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var nameField: UITextField!
     @IBOutlet var typeField: UITextField!
     @IBOutlet var numberField: UITextField!
@@ -16,7 +16,12 @@ class DetailViewController: UIViewController {
     @IBOutlet var weightField: UITextField!
     @IBOutlet var dateLabel: UILabel!
     
-    var item: Item!
+    var item: Item! {
+        //TITLE ON NAV BAR IS THE NAME OF POKEMON
+        didSet {
+            navigationItem.title = item.name
+        }
+    }
     
     let numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -52,6 +57,9 @@ class DetailViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
             
+        // Clear first responder/ Getting rid of the keyboard
+        view.endEditing(true)
+        
         // "Save" changes to item
         item.name = nameField.text ?? ""
         item.type = typeField.text ?? ""
@@ -71,7 +79,17 @@ class DetailViewController: UIViewController {
         
     }
     
+    //RETURNS KEYBOARD BACK BY RETURN BUTTON
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+    return true }
     
-
+    //RETURNS KEYBOARD BACK BY TAPPING ANYWHERE
+    @IBAction func backgroundTapped(_ sender: Any) {
+        view.endEditing(true)
+    }
+    
+    
+    
 }
 

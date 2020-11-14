@@ -54,7 +54,7 @@ class ItemsViewController: UITableViewController {
     
     var itemStore: ItemStore!
     
-    @IBAction func addNewItem(_ sender: UIButton) {
+    @IBAction func addNewItem(_ sender: UIBarButtonItem) {
         // Create a new item and add it to the store
         let newItem = itemStore.createItem()
         
@@ -78,6 +78,12 @@ class ItemsViewController: UITableViewController {
             // Enter editing mode
             setEditing(true, animated: true)
         }
+    }
+    
+    //Override the init(coder:) method to set the left bar button item - EDIT BUTTON
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        navigationItem.leftBarButtonItem = editButtonItem
     }
 
 
