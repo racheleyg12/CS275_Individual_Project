@@ -63,9 +63,7 @@ class ItemsViewController: UITableViewController {
             let indexPath = IndexPath(row: index, section: 0)
             // Insert this new row into the table
             tableView.insertRows(at: [indexPath], with: .automatic) }
-    
     }
-    
     @IBAction func toggleEditingMode(_ sender: UIButton) {
         // If you are currently in editing mode...
         if isEditing {
@@ -184,6 +182,24 @@ class ItemsViewController: UITableViewController {
         itemStore.moveItem(from: sourceIndexPath.row, to: destinationIndexPath.row)
     }
     
+    //SEGUE TO DETAILVIEW
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // if the triggered segue is the "showItem" segue
+        switch segue.identifier {
+        case "showPokemonDetails"?:
+        // figure out which row was just tapped
+            if let row = tableView.indexPathForSelectedRow?.row {
+                // get the item associated with this row and pass it along
+                let item = itemStore.allItems[row]
+                let detailViewController = segue.destination as! DetailViewController
+                detailViewController.item = item
+        }
+        default:
+            preconditionFailure("Unexpected segue identifier.")
+        }
+    }
+    
+    //LAST MINUTE THINGS TO APPLY TO THE VIEW
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = UITableView.automaticDimension
@@ -191,7 +207,6 @@ class ItemsViewController: UITableViewController {
     }
 
 }
-
 
 
 //override func viewDidLoad() {
