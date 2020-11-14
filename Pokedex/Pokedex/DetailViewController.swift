@@ -34,6 +34,7 @@ class DetailViewController: UIViewController {
         return formatter
     }()
     
+    //LOAD VIEW
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -46,5 +47,31 @@ class DetailViewController: UIViewController {
         weightField.text = "\(item.weight)"
         dateLabel.text = dateFormatter.string(from: item.dateCreated)
     }
+    
+    //SAVE DATA WHEN SWITCHING SCREENS
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+            
+        // "Save" changes to item
+        item.name = nameField.text ?? ""
+        item.type = typeField.text ?? ""
+        item.number = Int(numberField.text ?? "") ?? 0
+        item.generation = Int(generationField.text ?? "") ?? 0
+        item.gender = genderField.text ?? ""
+        item.weight = Double(weightField.text ?? "") ?? 0
+        item.height = Double(heightField.text ?? "") ?? 0
+        
+        //If I want to format number
+//        if let valueText = valueField.text,
+//            let value = numberFormatter.number(from: valueText) {
+//            item.valueInDollars = value.intValue
+//        } else {
+//            item.valueInDollars = 0
+//        }
+        
+    }
+    
+    
+
 }
 

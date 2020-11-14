@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qFK-p3-Kz5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="F6A-uA-cRi">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -97,21 +97,22 @@
                             <outlet property="delegate" destination="qFK-p3-Kz5" id="9Pm-lG-lPf"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="rmp-s1-Rcc"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3fA-Yc-WCh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4.3478260869565224" y="118.20652173913044"/>
+            <point key="canvasLocation" x="911.59420289855075" y="118.20652173913044"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="iDC-4N-lWB">
             <objects>
                 <viewController id="owu-GU-rrZ" customClass="DetailViewController" customModule="Pokedex" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CQD-6P-bfS">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="G0g-gw-0V6">
-                                <rect key="frame" x="8" y="8" width="398" height="700"/>
+                                <rect key="frame" x="8" y="52" width="398" height="676"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="RA6-7g-RMz">
                                         <rect key="frame" x="0.0" y="0.0" width="398" height="34"/>
@@ -226,10 +227,10 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JyZ-Lf-eCb">
-                                        <rect key="frame" x="0.0" y="378" width="398" height="322"/>
+                                        <rect key="frame" x="0.0" y="378" width="398" height="298"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9YJ-dp-Tgf">
-                                                <rect key="frame" x="0.0" y="0.0" width="398" height="322"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="398" height="298"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -270,7 +271,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RFs-tF-ZFn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="827" y="115"/>
+            <point key="canvasLocation" x="1733.3333333333335" y="114.94565217391305"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="g78-h2-neW">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="F6A-uA-cRi" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iIR-Qz-GXz">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="qFK-p3-Kz5" kind="relationship" relationship="rootViewController" id="tZV-BE-isA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Pe-AM-hTE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4.3478260869565224" y="118.20652173913044"/>
         </scene>
     </scenes>
 </document>

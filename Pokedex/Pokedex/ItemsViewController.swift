@@ -182,7 +182,7 @@ class ItemsViewController: UITableViewController {
         itemStore.moveItem(from: sourceIndexPath.row, to: destinationIndexPath.row)
     }
     
-    //SEGUE TO DETAILVIEW
+    //SEGUE TO DETAILVIEW - CONNECTING TO DETAIL VIEW
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // if the triggered segue is the "showItem" segue
         switch segue.identifier {
@@ -197,6 +197,12 @@ class ItemsViewController: UITableViewController {
         default:
             preconditionFailure("Unexpected segue identifier.")
         }
+    }
+    
+    //RELOAD UITableView so the user can immediately see the changes FROM DETAIL VEIW
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
     }
     
     //LAST MINUTE THINGS TO APPLY TO THE VIEW

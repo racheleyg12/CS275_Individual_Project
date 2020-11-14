@@ -20,10 +20,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let _ = (scene as? UIWindowScene) else { return }
         
         //Starting with iOS 13, handing is done in SceneDelegate. You should put all the method there with modifications.
-        // Create an ItemStore
-        let itemStore = ItemStore()
+        
+        // Create an ItemStore from appDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let itemStore = appDelegate.itemStore
+        
         // Access the ItemsViewController and set its item store
-        let itemsController = window!.rootViewController as! ItemsViewController
+        let navController = window!.rootViewController as! UINavigationController
+        let itemsController = navController.topViewController as! ItemsViewController
         itemsController.itemStore = itemStore
     }
 
