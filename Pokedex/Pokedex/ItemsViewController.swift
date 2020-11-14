@@ -11,11 +11,21 @@ class Item: NSObject {
     var name: String
     var type: String
     var number: Int
+    var generation: Int
+    var gender: String?
+    var weight: Double
+    var height: Double
+    let dateCreated: Date
     
-    init(name: String, type: String, number:Int) {
+    init(name: String, type: String, number:Int, generation: Int, gender: String?, weight: Double, height: Double) {
         self.name = name
         self.type = type
         self.number = number
+        self.generation = generation
+        self.gender = gender
+        self.weight = weight
+        self.height = height
+        self.dateCreated = Date()
         super.init()
     }
     
@@ -30,12 +40,12 @@ class Item: NSObject {
             idx = arc4random_uniform(UInt32(types.count))
             let randomType = types[Int(idx)]
             
-            let randomValue = Int(arc4random_uniform(100))
-    
+            let randomNumber = Int(arc4random_uniform(100))
+            let randomGen = Int(arc4random_uniform(8))
             
-            self.init(name: randomName, type: randomType, number: randomValue)
+            self.init(name: randomName, type: randomType, number: randomNumber, generation: randomGen, gender: "none", weight: 0.5, height: 0.5)
         } else {
-            self.init(name: "", type: "", number: 0) }
+            self.init(name: "", type: "", number: 0, generation: 1, gender: "none", weight: 0.5, height: 0.5) }
         }
 
 }
