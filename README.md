@@ -5,8 +5,8 @@ Description of Model:
 I would like to make a UITableView of Pokémon.
 It would kinda be like a contact list of the Pokédex.
 (The Pokédex is a list of all the Pokemon and their traits.)
-Each Item (from Creating the Item Class in the textbook) would represent a Pokemon. It will have 7 properties: 
-var name: String 
+Each Item (from Creating the Item Class in the textbook) would represent a Pokemon. It will have 7 properties:  
+var name: String  
 var type: String 
 var number: Int 
 var generation: Int 
