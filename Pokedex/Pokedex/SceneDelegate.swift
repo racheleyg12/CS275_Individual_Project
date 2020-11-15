@@ -23,12 +23,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         // Create an ItemStore from appDelegate
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let itemStore = appDelegate.itemStore
+        let pokemonStore = appDelegate.pokemonStore
         
         // Access the ItemsViewController and set its item store
         let navController = window!.rootViewController as! UINavigationController
-        let itemsController = navController.topViewController as! ItemsViewController
-        itemsController.itemStore = itemStore
+        let itemsController = navController.topViewController as! PokemonViewController
+        itemsController.pokemonStore = pokemonStore
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

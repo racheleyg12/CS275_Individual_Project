@@ -16,10 +16,10 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var weightField: UITextField!
     @IBOutlet var dateLabel: UILabel!
     
-    var item: Item! {
+    var pokemon : Pokemon! {
         //TITLE ON NAV BAR IS THE NAME OF POKEMON
         didSet {
-            navigationItem.title = item.name
+            navigationItem.title = pokemon.name
         }
     }
     
@@ -43,14 +43,14 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        nameField.text = item.name
-        typeField.text = item.type
-        numberField.text = "\(item.number)"
-        generationField.text = "\(item.generation)"
-        genderField.text = item.gender
-        heightField.text = "\(item.height)"
-        weightField.text = "\(item.weight)"
-        dateLabel.text = dateFormatter.string(from: item.dateCreated)
+        nameField.text = pokemon.name
+        typeField.text = pokemon.type
+        numberField.text = "\(pokemon.number)"
+        generationField.text = "\(pokemon.generation)"
+        genderField.text = pokemon.gender
+        heightField.text = "\(pokemon.height)"
+        weightField.text = "\(pokemon.weight)"
+        dateLabel.text = dateFormatter.string(from: pokemon.dateCreated)
     }
     
     //SAVE DATA WHEN SWITCHING SCREENS
@@ -61,13 +61,13 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         view.endEditing(true)
         
         // "Save" changes to item
-        item.name = nameField.text ?? ""
-        item.type = typeField.text ?? ""
-        item.number = Int(numberField.text ?? "") ?? 0
-        item.generation = Int(generationField.text ?? "") ?? 0
-        item.gender = genderField.text ?? ""
-        item.weight = Double(weightField.text ?? "") ?? 0
-        item.height = Double(heightField.text ?? "") ?? 0
+        pokemon.name = nameField.text ?? ""
+        pokemon.type = typeField.text ?? ""
+        pokemon.number = Int(numberField.text ?? "") ?? 0
+        pokemon.generation = Int(generationField.text ?? "") ?? 0
+        pokemon.gender = genderField.text ?? ""
+        pokemon.weight = Double(weightField.text ?? "") ?? 0
+        pokemon.height = Double(heightField.text ?? "") ?? 0
         
         //If I want to format number
 //        if let valueText = valueField.text,

@@ -10,7 +10,7 @@
         <!--Pokédex-->
         <scene sceneID="TfP-N5-Wpj">
             <objects>
-                <tableViewController id="qFK-p3-Kz5" customClass="ItemsViewController" customModule="Pokedex" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="qFK-p3-Kz5" customClass="PokemonViewController" customModule="Pokedex" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Pjv-Ri-tnm">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
