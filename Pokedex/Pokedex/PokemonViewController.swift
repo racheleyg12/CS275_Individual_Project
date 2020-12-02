@@ -71,23 +71,16 @@ class Pokemon: NSObject, NSCoding {
     }
     //Required to implement Archiving (2)
     //Objects being loaded from an archive are sent the message init(coder:)
+    //added convenience
     required init(coder aDecoder: NSCoder) {
         name = aDecoder.decodeObject(forKey: "name") as! String
-        print("gets name")
         type = aDecoder.decodeObject(forKey: "type") as! String
-        print("gets type")
-        number = aDecoder.decodeObject(forKey: "number") as! Int? ?? 0
-        print("gets number")
-        generation = aDecoder.decodeObject(forKey: "generation") as! Int? ?? 0
-        print("gets generation")
+        number = aDecoder.decodeInteger(forKey: "number")
+        generation = aDecoder.decodeInteger(forKey: "generation")
         gender = aDecoder.decodeObject(forKey: "gender") as! String?
-        print("gets gender")
-        weight = aDecoder.decodeObject(forKey: "weight") as! Double? ?? 0.5
-        print("gets weight")
-        height = aDecoder.decodeObject(forKey: "height") as! Double? ?? 0.5
-        print("gets height")
+        weight = aDecoder.decodeDouble(forKey: "weight")
+        height = aDecoder.decodeDouble(forKey: "height")
         dateCreated = aDecoder.decodeObject(forKey: "dateCreated") as! Date
-        print("gets dateCreated")
         super.init()
         print("Objects loaded from an archive")
     }
@@ -141,8 +134,16 @@ class PokemonViewController: UITableViewController {
         // that is at the nth index of items, where n = row this cell
         // What will appear in on the tableview
         cell.nameLabel?.text = pokemon.name
-        cell.numberLabel?.text = "\(pokemon.number)"
+        
         cell.typeLabel?.text = pokemon.type
+        // Format Number
+        if(pokemon.number < 10){
+            cell.numberLabel?.text = "00\(pokemon.number)"
+        } else if (9 < pokemon.number && pokemon.number < 100){
+            cell.numberLabel?.text = "0\(pokemon.number)"
+        } else {
+            cell.numberLabel?.text = "\(pokemon.number)"
+        }
         
         //"Normal", "Fire", "Water", "Grass", "Flying", "Fighting", "Poison", "Electric", "Ground", "Rock", "Psychic", "Ice", "Bug", "Ghost", "Steel", "Dragon", "Dark", "Fairy"
         //Color of the Type

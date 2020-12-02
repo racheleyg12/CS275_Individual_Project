@@ -18,10 +18,6 @@ class PokemonStore {
         return documentDirectory.appendingPathComponent("items.archive")
     }()
     //Saves every single Pokemon in allPokemon to the itemArchiveURL
-//    func saveChanges() -> Bool {
-//        print("Saving items to: \(itemArchiveURL.path)")
-//        return NSKeyedArchiver.archiveRootObject(allPokemon, toFile: itemArchiveURL.path)
-//    }
     func saveChanges() -> Bool {
         do {
             let data = try NSKeyedArchiver.archivedData(withRootObject: allPokemon, requiringSecureCoding: false)
@@ -34,12 +30,6 @@ class PokemonStore {
         }
     }
     //Load files. To load instances of Item when the application launches, you will use the class NSKeyedUnarchiver when the ItemStore is created.
-//    init() {
-//        if let archivedItems =
-//            NSKeyedUnarchiver.unarchiveObject(withFile: itemArchiveURL.path) as? [Pokemon] {
-//                allPokemon = archivedItems
-//        }
-//    }
     init() {
         do {
             let data = try Data(contentsOf: itemArchiveURL)
@@ -78,11 +68,5 @@ class PokemonStore {
         let newPokemon = Pokemon(random: true)
         allPokemon.append(newPokemon)
         return newPokemon
-    }
-    
-    func printPokemon(){
-        for Pokemon in allPokemon{
-            print(Pokemon.name)
-        }
     }
 }
