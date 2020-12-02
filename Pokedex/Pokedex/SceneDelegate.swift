@@ -11,7 +11,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    //let pokemonStore = PokemonStore()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -46,6 +46,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneWillResignActive(_ scene: UIScene) {
         // Called when the scene will move from an active state to an inactive state.
         // This may occur due to temporary interruptions (ex. an incoming phone call).
+        
+//        let success = pokemonStore.saveChanges()
+//        if (success) {
+//            print("Saved all of the Items")
+//        } else {
+//            print("Could not save any of the Items")
+//        }
+//
+//        print("Leaving app")
     }
 
     func sceneWillEnterForeground(_ scene: UIScene) {
@@ -57,6 +66,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
+        // Create an ItemStore from appDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let pokemonStore = appDelegate.pokemonStore
+        
+        //Saved all items
+        let success = pokemonStore.saveChanges()
+        if (success) {
+            print("Saved all of the Items")
+        } else {
+            print("Could not save any of the Items")
+        }
+        print("Leaving app")
+        
+        
     }
 
 

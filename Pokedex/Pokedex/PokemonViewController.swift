@@ -9,7 +9,7 @@ import UIKit
 
 var loopThur = 0
 
-class Pokemon: NSObject {
+class Pokemon: NSObject, NSCoding {
     var name: String
     var type: String
     var number: Int
@@ -33,30 +33,64 @@ class Pokemon: NSObject {
     
     convenience init(random: Bool = false) {
         if random {
-            let names = ["Zigzagoon", "Vulpix", "Poliwag", "Bulbasaur", "Rookidee",  "Timburr", "Nidoran", "Pachirisu", "Sandshrew", "Rockruff", "Espeon", "Snorunt", "Caterpie", "Misdreavus", "Meltan", "Axew", "Umbreon", "Togepi"]
-            let types = ["Normal", "Fire", "Water", "Grass", "Flying", "Fighting", "Poison", "Electric", "Ground", "Rock", "Psychic", "Ice", "Bug", "Ghost", "Steel", "Dragon", "Dark", "Fairy"]
-            let numbers = [263, 037, 060, 001, 821, 532, 032, 417, 027, 744, 196, 361, 010, 200, 808, 610, 197, 175]
-            let generations = [3, 1, 1, 1, 8, 5, 1, 4, 1, 7, 2, 3, 1, 2, 7, 4, 2, 2]
+            let names:[String] = ["Zigzagoon", "Vulpix", "Poliwag", "Bulbasaur", "Rookidee",  "Timburr", "Nidoran", "Pachirisu", "Sandshrew", "Rockruff", "Espeon", "Snorunt", "Caterpie", "Misdreavus", "Meltan", "Axew", "Umbreon", "Togepi"]
+            let types:[String] = ["Normal", "Fire", "Water", "Grass", "Flying", "Fighting", "Poison", "Electric", "Ground", "Rock", "Psychic", "Ice", "Bug", "Ghost", "Steel", "Dragon", "Dark", "Fairy"]
+            let numbers:[Int] = [263, 037, 060, 001, 821, 532, 032, 417, 027, 744, 196, 361, 010, 200, 808, 610, 197, 175]
+            let generations:[Int] = [3, 1, 1, 1, 8, 5, 1, 4, 1, 7, 2, 3, 1, 2, 7, 4, 2, 2]
             
-            //let idx = arc4random_uniform(UInt32(names.count))
-            
+            //Loops thur 18 different types of pokemon
             if (loopThur == 18) {
-                print("what?")
                 loopThur = 0
             }
             let idx = loopThur
-            let randomName = names[Int(idx)]
-            let randomType = types[Int(idx)]
-            let randomNumber = numbers[Int(idx)]
-            let randomGen = generations[Int(idx)]
+            let randomName:String = names[Int(idx)]
+            let randomType:String = types[Int(idx)]
+            let randomNumber:Int = numbers[Int(idx)]
+            let randomGen:Int = generations[Int(idx)]
             
             loopThur += 1
             
             self.init(name: randomName, type: randomType, number: randomNumber, generation: randomGen, gender: "none", weight: 0.5, height: 0.5)
         } else {
-            self.init(name: "", type: "", number: 0, generation: 1, gender: "none", weight: 0.5, height: 0.5) }
+            let num: Int = 0
+            self.init(name: "Name", type: "Type", number: num, generation: 0, gender: "none", weight: 0.5, height: 0.5) }
         }
-
+    
+    //Required to implement Archiving (1)
+    //NSCoder writes out a stream of data in key-value pairs to be stored in the filesystem
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(name, forKey: "name")
+        aCoder.encode(type, forKey: "type")
+        aCoder.encode(number, forKey: "number")
+        aCoder.encode(generation, forKey: "generation")
+        aCoder.encode(gender, forKey: "gender")
+        aCoder.encode(weight, forKey: "weight")
+        aCoder.encode(height, forKey: "height")
+        aCoder.encode(dateCreated, forKey: "dateCreated")
+        print("Put data in key-value pairs to be stored")
+    }
+    //Required to implement Archiving (2)
+    //Objects being loaded from an archive are sent the message init(coder:)
+    required init(coder aDecoder: NSCoder) {
+        name = aDecoder.decodeObject(forKey: "name") as! String
+        print("gets name")
+        type = aDecoder.decodeObject(forKey: "type") as! String
+        print("gets type")
+        number = aDecoder.decodeObject(forKey: "number") as! Int? ?? 0
+        print("gets number")
+        generation = aDecoder.decodeObject(forKey: "generation") as! Int? ?? 0
+        print("gets generation")
+        gender = aDecoder.decodeObject(forKey: "gender") as! String?
+        print("gets gender")
+        weight = aDecoder.decodeObject(forKey: "weight") as! Double? ?? 0.5
+        print("gets weight")
+        height = aDecoder.decodeObject(forKey: "height") as! Double? ?? 0.5
+        print("gets height")
+        dateCreated = aDecoder.decodeObject(forKey: "dateCreated") as! Date
+        print("gets dateCreated")
+        super.init()
+        print("Objects loaded from an archive")
+    }
 }
 
 class PokemonViewController: UITableViewController {
@@ -64,14 +98,7 @@ class PokemonViewController: UITableViewController {
     var pokemonStore: PokemonStore!
     
     @IBAction func addNewItem(_ sender: UIBarButtonItem) {
-        // Create a new item and add it to the store
-        let newPokemon = pokemonStore.createPokemon()
-        
-        // Figure out where that item is in the array
-        if let index = pokemonStore.allPokemon.firstIndex(of: newPokemon) {
-            let indexPath = IndexPath(row: index, section: 0)
-            // Insert this new row into the table
-            tableView.insertRows(at: [indexPath], with: .automatic) }
+        //Functionality is now to a segue
     }
     @IBAction func toggleEditingMode(_ sender: UIButton) {
         // If you are currently in editing mode...
@@ -95,21 +122,10 @@ class PokemonViewController: UITableViewController {
         navigationItem.leftBarButtonItem = editButtonItem
     }
 
-
-//    func numberOfSectionsInTableView(_ tableView: UITableView) -> Int {
-//        return 2
-//    }
-    
-//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?{
-//        return "0"
-//
-//    }
     
     //numberOfRowsInSection
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return pokemonStore.allPokemon.count
-        //return 2
-        
+            return pokemonStore.allPokemon.count
     }
     
     //Reusing Cells
@@ -209,6 +225,7 @@ class PokemonViewController: UITableViewController {
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             ac.addAction(cancelAction)
             
+            //ACTUALLY REMOVING THE ITEM/POKEMON
             let deleteAction = UIAlertAction(title: "Delete", style: .destructive,
                                              handler: { (action) -> Void in
                 // Remove the item from the store
@@ -222,7 +239,6 @@ class PokemonViewController: UITableViewController {
             present(ac, animated: true, completion: nil)
         }
     }
-        
     
     //In order to move rows
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
@@ -230,21 +246,48 @@ class PokemonViewController: UITableViewController {
         pokemonStore.movePokemon(from: sourceIndexPath.row, to: destinationIndexPath.row)
     }
     
-    //SEGUE TO DETAILVIEW - CONNECTING TO DETAIL VIEW
+    //SEGUE TO DETAILVIEW - CONNECTING TO DETAIL VIEW -ON POKEMONCELL & ADD BUTTON
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // if the triggered segue is the "showItem" segue
         switch segue.identifier {
-        case "showPokemonDetails"?:
+        case "showPokemonDetailsFromCell"?:
         // figure out which row was just tapped
             if let row = tableView.indexPathForSelectedRow?.row {
-                // get the item associated with this row and pass it along
+                // Get the item associated with this row and pass it along
                 let pokemon = pokemonStore.allPokemon[row]
                 let detailViewController = segue.destination as! DetailViewController
                 detailViewController.pokemon = pokemon
-        }
+                //PASS IN INDEX
+                detailViewController.row = row
+                //print("Tapped on a cell")
+            }
+        case "showPokemonDetailsFromAdd"?:
+            // Create a new Pokemon and add it to the Pokedex
+            let newPokemon = pokemonStore.createPokemon()
+            //print("Created a new Pokemon and add it to the Pokedex")
+            
+            // Figure out where that item is in the array
+            if let index = pokemonStore.allPokemon.firstIndex(of: newPokemon) {
+                let indexPath = IndexPath(row: index, section: 0)
+                // Insert this new row into the table
+                tableView.insertRows(at: [indexPath], with: .automatic)
+            }
+            
+            //INFO GIVEN TO DETAILVIEW
+            // Pokemon are added to the last row
+            let index = pokemonStore.allPokemon.count - 1
+            let pokemon = pokemonStore.allPokemon[index]
+            let detailViewController = segue.destination as! DetailViewController
+            detailViewController.pokemon = pokemon
+            //PASS IN INDEX
+            detailViewController.row = index
         default:
             preconditionFailure("Unexpected segue identifier.")
         }
+    }
+    
+    @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
+        //Excutes self.performSegue (withIdentifier: "unwindToPokemonViewController", sender: self)
     }
     
     //RELOAD UITableView so the user can immediately see the changes FROM DETAIL VEIW
@@ -259,5 +302,13 @@ class PokemonViewController: UITableViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 65
     }
+    
+}
 
+//For debugging constraint errors
+extension NSLayoutConstraint {
+    override public var description: String {
+        let id = identifier ?? ""
+        return "id: \(id), constant: \(constant)" //you may print whatever you want here
+    }
 }

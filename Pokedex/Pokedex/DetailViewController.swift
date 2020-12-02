@@ -16,6 +16,9 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var weightField: UITextField!
     @IBOutlet var dateLabel: UILabel!
     
+    //To Pass data in
+    var row: Int = 0;
+    
     var pokemon : Pokemon! {
         //TITLE ON NAV BAR IS THE NAME OF POKEMON
         didSet {
@@ -23,13 +26,6 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    let numberFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        formatter.minimumFractionDigits = 2
-        formatter.maximumFractionDigits = 2
-        return formatter
-    }()
     //May be format number like: 002 & 087
     
     let dateFormatter: DateFormatter = {
@@ -68,15 +64,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         pokemon.gender = genderField.text ?? ""
         pokemon.weight = Double(weightField.text ?? "") ?? 0
         pokemon.height = Double(heightField.text ?? "") ?? 0
-        
-        //If I want to format number
-//        if let valueText = valueField.text,
-//            let value = numberFormatter.number(from: valueText) {
-//            item.valueInDollars = value.intValue
-//        } else {
-//            item.valueInDollars = 0
-//        }
-        
+            
     }
     
     //RETURNS KEYBOARD BACK BY RETURN BUTTON
@@ -89,7 +77,16 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         view.endEditing(true)
     }
     
+    //TRASH BAR BUTTON
+    @IBAction func deleteItem(_ sender: UIBarButtonItem) {
+        //Deletes the Pokemon
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let pokemonStore = appDelegate.pokemonStore
+        pokemonStore.removePokemon(pokemon)
+        //Goes back to Pokemon View
+        self.performSegue(withIdentifier: "unwindToPokemonViewController", sender: self)
+    }
     
-    
+
 }
 

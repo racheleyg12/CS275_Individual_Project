@@ -11,11 +11,4 @@ class PokemonCell: UITableViewCell {
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var numberLabel: UILabel!
     @IBOutlet var typeLabel: UILabel!
-    
-    //typeLabel.textColor = UIColor.red
-    
-//    if (nameLabel.text == "water"){
-//
-//    }
-    
 }
